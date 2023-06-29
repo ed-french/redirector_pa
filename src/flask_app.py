@@ -198,7 +198,7 @@ def link():
     if not len(matches)==1:
         return Response("Invalid link", 400)
 
-    destination_link=matches[0]
+    destination_link:Link=matches[0]
 
     # increment the count
     destination_link.hit_count=Link.hit_count+1
@@ -210,7 +210,7 @@ def link():
 
     # Send SMS
 
-    message=f"""{destination_link.link_label} hit for {ip_address} to visit {destination_link.destination}
+    message=f"""{destination_link.link_label} hit for {ip_address} with audience of {destination_link.audience} to visit {destination_link.destination}
     https://infuriatingpixels.pythonanywhere.com/list_links?key={credentials.LINK_API_KEY}"""
     sendSMS(message,credentials.USERS["Ed"])
 
